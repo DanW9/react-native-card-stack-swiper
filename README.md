@@ -3,6 +3,7 @@
 A fork of [react-native-card-stack-swiper](https://github.com/lhandel/react-native-card-stack-swiper), modified to render 5 cards at a time and to add some useful events:
 
 `onSwipeCancel` to detect a failed/cancelled swipe
+
 `onSwipeSuccess` does the same as `onSwiped`, but triggers as soon as the user releases touch
 
 ## Installation
