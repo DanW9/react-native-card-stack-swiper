@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { StyleProp, ViewProps, ViewStyle } from 'react-native';
+import * as React from "react";
+import { StyleProp, ViewProps, ViewStyle } from "react-native";
 
 export interface CardStackProps {
   style?: StyleProp<ViewStyle>;
@@ -14,10 +14,11 @@ export interface CardStackProps {
   horizontalSwipe?: boolean;
   verticalThreshold?: number;
   horizontalThreshold?: number;
-  outputRotationRange?: [string, string, string]
+  outputRotationRange?: [string, string, string];
   onSwipeStart?: (index: number) => void;
   onSwipeEnd?: (index: number) => void;
-  onSwipeCancel?: () => void; 
+  onSwipeCancel?: () => void;
+  onSwipeSuccess?: () => void;
   onSwiped?: (index: number) => void;
   onSwipedLeft?: (index: number) => void;
   onSwipedRight?: (index: number) => void;
