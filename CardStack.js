@@ -173,15 +173,15 @@ class CardStack extends Component {
           ? this._getIndex(this.state.sindex - 2, children.length)
           : this._getIndex(this.state.sindex - 1, children.length);
       let cIndex =
-        this.state.topCard == "cardB"
+        this.state.topCard == "cardA"
           ? this._getIndex(this.state.sindex - 3, children.length)
           : this._getIndex(this.state.sindex - 2, children.length);
       let dIndex =
-        this.state.topCard == "cardB"
+        this.state.topCard == "cardA"
           ? this._getIndex(this.state.sindex - 4, children.length)
           : this._getIndex(this.state.sindex - 3, children.length);
       let eIndex =
-        this.state.topCard == "cardB"
+        this.state.topCard == "cardA"
           ? this._getIndex(this.state.sindex - 5, children.length)
           : this._getIndex(this.state.sindex - 4, children.length);
       this.setState({
@@ -306,7 +306,6 @@ class CardStack extends Component {
       update = {
         ...update,
         cardA: cards[previusCardIndex],
-        cardB: cards[previusCardIndex + 1],
         cardC: cards[previusCardIndex + 2],
         cardD: cards[previusCardIndex + 3],
         cardE: cards[previusCardIndex + 4],
@@ -413,10 +412,9 @@ class CardStack extends Component {
           update = {
             ...update,
             cardA: cards[nextCard],
-            cardB: cards[nextCard + 1],
-            cardC: cards[nextCard + 2],
-            cardD: cards[nextCard + 3],
-            cardE: cards[nextCard + 4],
+            cardC: cards[nextCard + 1],
+            cardD: cards[nextCard + 2],
+            cardE: cards[nextCard + 3],
           };
         }
         this.state.drag.setValue({ x: 0, y: 0 });
