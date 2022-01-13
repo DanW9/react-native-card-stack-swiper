@@ -176,11 +176,21 @@ class CardStack extends Component {
         this.state.topCard == "cardB"
           ? this._getIndex(this.state.sindex - 3, children.length)
           : this._getIndex(this.state.sindex - 2, children.length);
+      let dIndex =
+        this.state.topCard == "cardB"
+          ? this._getIndex(this.state.sindex - 4, children.length)
+          : this._getIndex(this.state.sindex - 3, children.length);
+      let eIndex =
+        this.state.topCard == "cardB"
+          ? this._getIndex(this.state.sindex - 5, children.length)
+          : this._getIndex(this.state.sindex - 4, children.length);
       this.setState({
         cards: children,
         cardA: children[aIndex] || null,
         cardB: children[bIndex] || null,
         cardC: children[cIndex] || null,
+        cardD: children[dIndex] || null,
+        cardE: children[eIndex] || null,
       });
     }
   }
@@ -222,14 +232,24 @@ class CardStack extends Component {
     const initialIndexC = loop
       ? this.mod(initialIndexA + 2, cards.length)
       : initialIndexA + 2;
+    const initialIndexD = loop
+      ? this.mod(initialIndexA + 3, cards.length)
+      : initialIndexA + 3;
+    const initialIndexE = loop
+      ? this.mod(initialIndexA + 4, cards.length)
+      : initialIndexA + 4;
     const cardA = cards[initialIndexA] || null;
     const cardB = cards[initialIndexB] || null;
     const cardC = cards[initialIndexC] || null;
+    const cardD = cards[initialIndexD] || null;
+    const cardE = cards[initialIndexE] || null;
     this.setState({
       cards,
       cardA,
       cardB,
       cardC,
+      cardD,
+      cardE,
       sindex: initialIndexB + 1,
     });
   }
@@ -279,12 +299,17 @@ class CardStack extends Component {
         ...update,
         cardB: cards[previusCardIndex],
         cardC: cards[previusCardIndex + 1],
+        cardD: cards[previusCardIndex + 2],
+        cardE: cards[previusCardIndex + 3],
       };
     } else {
       update = {
         ...update,
         cardA: cards[previusCardIndex],
         cardB: cards[previusCardIndex + 1],
+        cardC: cards[previusCardIndex + 2],
+        cardD: cards[previusCardIndex + 3],
+        cardE: cards[previusCardIndex + 4],
       };
     }
 
@@ -360,7 +385,7 @@ class CardStack extends Component {
       this.props.onSwipedAll();
     }
 
-    if (sindex - 3 < cards.length || loop) {
+    if (sindex - 5 < cards.length || loop) {
       Animated.spring(this.state.dragDistance, {
         toValue: 220,
         duration,
@@ -380,13 +405,18 @@ class CardStack extends Component {
             ...update,
             cardB: cards[nextCard],
             cardC: cards[nextCard + 1],
+            cardD: cards[nextCard + 2],
+            cardE: cards[nextCard + 3],
           };
         }
         if (newTopCard === "cardB") {
           update = {
             ...update,
             cardA: cards[nextCard],
+            cardB: cards[nextCard + 1],
             cardC: cards[nextCard + 2],
+            cardD: cards[nextCard + 3],
+            cardE: cards[nextCard + 4],
           };
         }
         this.state.drag.setValue({ x: 0, y: 0 });
@@ -448,8 +478,17 @@ class CardStack extends Component {
 
   render() {
     const { secondCardZoom, renderNoMoreCards } = this.props;
-    const { drag, dragDistance, cardA, cardB, cardC, topCard, sindex } =
-      this.state;
+    const {
+      drag,
+      dragDistance,
+      cardA,
+      cardB,
+      cardC,
+      cardD,
+      cardE,
+      topCard,
+      sindex,
+    } = this.state;
 
     const scale = dragDistance.interpolate({
       inputRange: [0, 10, 220],
@@ -468,6 +507,52 @@ class CardStack extends Component {
         style={[{ position: "relative" }, this.props.style]}
       >
         {renderNoMoreCards()}
+        <Animated.View
+          {...this._setPointerEvents(topCard, "cardE")}
+          style={[
+            {
+              position: "absolute",
+              zIndex: 1,
+              ...Platform.select({
+                android: {
+                  elevation: 1,
+                },
+              }),
+              transform: [
+                { rotate: "0deg" },
+                { translateX: 0 },
+                { translateY: 0 },
+                { scale: scale },
+              ],
+            },
+            this.props.cardContainerStyle,
+          ]}
+        >
+          {cardE}
+        </Animated.View>
+        <Animated.View
+          {...this._setPointerEvents(topCard, "cardD")}
+          style={[
+            {
+              position: "absolute",
+              zIndex: 1,
+              ...Platform.select({
+                android: {
+                  elevation: 1,
+                },
+              }),
+              transform: [
+                { rotate: "0deg" },
+                { translateX: 0 },
+                { translateY: 0 },
+                { scale: scale },
+              ],
+            },
+            this.props.cardContainerStyle,
+          ]}
+        >
+          {cardD}
+        </Animated.View>
         <Animated.View
           {...this._setPointerEvents(topCard, "cardC")}
           style={[
@@ -587,7 +672,7 @@ CardStack.propTypes = {
 CardStack.defaultProps = {
   style: {},
   cardContainerStyle: {},
-  secondCardZoom: 0.95,
+  secondCardZoom: 1,
   loop: false,
   initialIndex: 0,
   renderNoMoreCards: () => {
