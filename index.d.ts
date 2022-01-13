@@ -18,6 +18,7 @@ export interface CardStackProps {
   onSwipeStart?: (index: number) => void;
   onSwipeEnd?: (index: number) => void;
   onSwipeCancel?: () => void;
+  onSwipedAll?: () => void;
   onSwipeSuccess?: () => void;
   onSwiped?: (index: number) => void;
   onSwipedLeft?: (index: number) => void;
