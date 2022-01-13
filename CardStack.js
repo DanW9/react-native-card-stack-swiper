@@ -448,7 +448,8 @@ class CardStack extends Component {
 
   render() {
     const { secondCardZoom, renderNoMoreCards } = this.props;
-    const { drag, dragDistance, cardA, cardB, topCard, sindex } = this.state;
+    const { drag, dragDistance, cardA, cardB, cardC, topCard, sindex } =
+      this.state;
 
     const scale = dragDistance.interpolate({
       inputRange: [0, 10, 220],
@@ -468,7 +469,7 @@ class CardStack extends Component {
       >
         {renderNoMoreCards()}
         <Animated.View
-          {...this._setPointerEvents(topCard, "cardB")}
+          {...this._setPointerEvents(topCard, "cardC")}
           style={[
             {
               position: "absolute",
