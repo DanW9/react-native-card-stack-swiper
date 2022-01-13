@@ -510,10 +510,10 @@ class CardStack extends Component {
           style={[
             {
               position: "absolute",
-              zIndex: 1,
+              zIndex: 2,
               ...Platform.select({
                 android: {
-                  elevation: 1,
+                  elevation: 2,
                 },
               }),
               transform: [
@@ -533,10 +533,10 @@ class CardStack extends Component {
           style={[
             {
               position: "absolute",
-              zIndex: 1,
+              zIndex: 2,
               ...Platform.select({
                 android: {
-                  elevation: 1,
+                  elevation: 2,
                 },
               }),
               transform: [
@@ -556,10 +556,10 @@ class CardStack extends Component {
           style={[
             {
               position: "absolute",
-              zIndex: 1,
+              zIndex: 2,
               ...Platform.select({
                 android: {
-                  elevation: 1,
+                  elevation: 2,
                 },
               }),
               transform: [
