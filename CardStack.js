@@ -110,6 +110,7 @@ class CardStack extends Component {
               gestureState.dy,
               this.props.duration
             );
+            this.props.onSwipeSuccess();
           } else if (swipeDirection > 0 && !disableRightSwipe) {
             this._nextCard(
               "right",
@@ -117,6 +118,7 @@ class CardStack extends Component {
               gestureState.dy,
               this.props.duration
             );
+            this.props.onSwipeSuccess();
           } else {
             this.props.onSwipeCancel();
             this._resetCard();
@@ -645,6 +647,7 @@ CardStack.propTypes = {
   onSwipeStart: PropTypes.func,
   onSwipeEnd: PropTypes.func,
   onSwipeCancel: PropTypes.func,
+  onSwipeSuccess: PropTypes.func,
   onSwiped: PropTypes.func,
   onSwipedLeft: PropTypes.func,
   onSwipedRight: PropTypes.func,
@@ -679,6 +682,7 @@ CardStack.defaultProps = {
   onSwipeStart: () => null,
   onSwipeEnd: () => null,
   onSwipeCancel: () => null,
+  onSwipeSuccess: () => null,
   onSwiped: () => {},
   onSwipedLeft: () => {},
   onSwipedRight: () => {},
